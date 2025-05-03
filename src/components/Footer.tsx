@@ -16,7 +16,7 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/afcca53e-1510-491b-af5e-cf670506751e.png" 
                 alt="Fastest Academy Logo" 
-                className="h-12 w-auto"
+                className="h-12 w-auto logo-hover"
               />
             </Link>
             <p className="text-gray-400 mb-6">
@@ -24,16 +24,16 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
+                <Facebook className="h-5 w-5 hover-grow" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
+                <Twitter className="h-5 w-5 hover-grow" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Instagram className="h-5 w-5" />
+                <Instagram className="h-5 w-5 hover-grow" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-5 w-5 hover-grow" />
               </a>
             </div>
           </div>

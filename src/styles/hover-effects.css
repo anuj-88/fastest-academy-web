@@ -1,0 +1,16 @@
+
+/* Image hover effects */
+.hover-grow {
+  @apply transition-transform duration-300;
+}
+.hover-grow:hover {
+  @apply transform scale-105;
+}
+
+/* Logo hover effect */
+.logo-hover {
+  @apply transition-all duration-300;
+}
+.logo-hover:hover {
+  @apply brightness-110;
+}
