@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { GraduationCap, BookOpen, LightBulb, ArrowUp, School, BookUser, BookText } from 'lucide-react';
+import { GraduationCap, BookOpen, Lightbulb, ArrowUp, School, BookUser, BookText } from 'lucide-react';
 
 interface AnimatedIconProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -53,7 +53,7 @@ export const HeroAnimation = ({ className = '' }: { className?: string }) => {
     <div className={`relative h-full w-full ${className}`}>
       <FloatingIcon icon={GraduationCap} delay={0} size="xl" className="top-0 right-0" />
       <FloatingIcon icon={BookOpen} delay={0.8} size="lg" className="top-1/4 right-1/4" />
-      <FloatingIcon icon={LightBulb} delay={1.6} size="lg" className="bottom-1/4 right-0" />
+      <FloatingIcon icon={Lightbulb} delay={1.6} size="lg" className="bottom-1/4 right-0" />
       <FloatingIcon icon={ArrowUp} delay={2.4} size="md" className="bottom-0 right-1/3" />
       <FloatingIcon icon={School} delay={3.2} size="xl" className="top-1/3 right-2/3" />
     </div>
@@ -67,7 +67,7 @@ export const SectionAnimation = ({ className = '', variant = 'primary' }: Animat
     setRandomSeed(Math.random());
   }, []);
   
-  const icons = [BookOpen, BookText, GraduationCap, LightBulb, School];
+  const icons = [BookOpen, BookText, GraduationCap, Lightbulb, School];
   const SelectedIcon = icons[Math.floor(randomSeed * icons.length)];
   
   return (

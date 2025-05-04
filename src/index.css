@@ -1,10 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import hover effects */
 @import './styles/hover-effects.css';
-/* Import custom animations */
 @import './styles/animations.css';
 
 @layer base {
