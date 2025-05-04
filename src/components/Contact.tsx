@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -14,6 +13,7 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,18 +23,64 @@ const Contact = () => {
     }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real application, you would send this data to your server
-    console.log('Form submitted:', formData);
-    toast.success("Thank you for your message. We'll get back to you soon!");
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
+  const submitToGoogleForm = async (data: typeof formData) => {
+    // This is the Google Form submission URL - in production, this should be handled by a server-side function
+    // Replace 'YOUR_FORM_ID' with the actual Google Form ID from the form URL
+    // The entry.XXXX values should match your Google Form field IDs
+    const formUrl = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+    
+    // Create URL search params to mimic form submission
+    const formParams = new URLSearchParams({
+      'entry.123456789': data.name, // Replace with your actual form entry IDs
+      'entry.234567890': data.email,
+      'entry.345678901': data.phone,
+      'entry.456789012': data.subject,
+      'entry.567890123': data.message,
+      'submit': 'Submit'
     });
+    
+    try {
+      // Note: Direct CORS issues will prevent this from working client-side in production
+      // This is a temporary solution that may not work well due to CORS restrictions
+      // A proper implementation would use a server-side function (e.g., Supabase Edge Function)
+      const response = await fetch(`${formUrl}?${formParams.toString()}`, {
+        method: 'GET',
+        mode: 'no-cors', // This is needed but will prevent you from seeing response status
+      });
+      
+      console.log('Form submitted to Google');
+      return true;
+    } catch (error) {
+      console.error('Error submitting to Google Form:', error);
+      return false;
+    }
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // In a real application, you would send this data to your server
+      console.log('Form submitted:', formData);
+      
+      // Attempt to submit to Google Form (note: likely to hit CORS issues)
+      await submitToGoogleForm(formData);
+      
+      toast.success("Thank you for your message. We'll get back to you soon!");
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error("There was a problem submitting your message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -175,8 +221,11 @@ const Contact = () => {
                   />
                 </div>
                 
-                <Button className="bg-fa-blue hover:bg-fa-light-blue text-white w-full">
-                  Send Message
+                <Button 
+                  className="bg-fa-blue hover:bg-fa-light-blue text-white w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                   <Send className="ml-2 h-4 w-4" />
                 </Button>
               </form>
