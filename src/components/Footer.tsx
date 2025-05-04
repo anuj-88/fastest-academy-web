@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,7 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/afcca53e-1510-491b-af5e-cf670506751e.png" 
                 alt="Fastest Academy Logo" 
-                className="h-12 w-auto logo-hover"
+                className="h-84 w-auto logo-hover"
               />
             </Link>
             <p className="text-gray-400 mb-6">
