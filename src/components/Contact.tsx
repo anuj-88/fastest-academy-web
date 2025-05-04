@@ -1,9 +1,17 @@
+
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { 
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle 
+} from "@/components/ui/card";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +22,7 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showForm, setShowForm] = useState('native'); // 'native' or 'google'
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -154,82 +163,119 @@ const Contact = () => {
           </div>
           
           <div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold mb-4">Send Us a Message</h3>
-              
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your Name"
-                      required
-                    />
+            <Card className="shadow-md">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold">Contact Form</CardTitle>
+                <CardDescription>
+                  <div className="flex space-x-4 mb-2">
+                    <button 
+                      onClick={() => setShowForm('native')}
+                      className={`px-4 py-2 rounded-md ${showForm === 'native' 
+                        ? 'bg-fa-blue text-white' 
+                        : 'bg-gray-100 hover:bg-gray-200'}`}
+                    >
+                      Quick Form
+                    </button>
+                    <button 
+                      onClick={() => setShowForm('google')}
+                      className={`px-4 py-2 rounded-md ${showForm === 'google' 
+                        ? 'bg-fa-blue text-white' 
+                        : 'bg-gray-100 hover:bg-gray-200'}`}
+                    >
+                      Full Form
+                    </button>
                   </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Your Email"
-                      required
-                    />
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {showForm === 'native' ? (
+                  <form onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Your Name"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="Your Email"
+                          required
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="Your Phone"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                        <Input
+                          id="subject"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          placeholder="Subject"
+                          required
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Your Message"
+                        rows={4}
+                        required
+                      />
+                    </div>
+                    
+                    <Button 
+                      className="bg-fa-blue hover:bg-fa-light-blue text-white w-full"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                      <Send className="ml-2 h-4 w-4" />
+                    </Button>
+                  </form>
+                ) : (
+                  <div className="w-full overflow-hidden rounded-md">
+                    <iframe 
+                      src="https://docs.google.com/forms/d/e/1FAIpQLSdrA6fL9cQxRpMTfJemD_Mk-5fkYr2NZXRaDqbZm44nT5GwcQ/viewform?embedded=true" 
+                      width="100%" 
+                      height="650" 
+                      style={{ border: 0 }}
+                      title="Contact Form"
+                    >
+                      Loading...
+                    </iframe>
                   </div>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="Your Phone"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="Subject"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="mb-4">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Your Message"
-                    rows={4}
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  className="bg-fa-blue hover:bg-fa-light-blue text-white w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                  <Send className="ml-2 h-4 w-4" />
-                </Button>
-              </form>
-            </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
         </div>
         
