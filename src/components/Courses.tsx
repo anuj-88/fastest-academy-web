@@ -1,6 +1,7 @@
 
 import { ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { SectionAnimation } from './AnimatedIcons';
 
 const courseData = [
   {
@@ -57,7 +58,10 @@ const Courses = () => {
   return (
     <section id="courses" className="py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative">
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            <SectionAnimation />
+          </div>
           <h2 className="text-2xl md:text-3xl font-bold mb-2">Our <span className="text-fa-blue">Courses</span></h2>
           <div className="w-20 h-1 bg-fa-blue mx-auto mb-4"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">

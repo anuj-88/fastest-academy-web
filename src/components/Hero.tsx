@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { HeroAnimation } from "./AnimatedIcons";
 
 const Hero = () => {
   return (
@@ -32,6 +33,9 @@ const Hero = () => {
                 alt="Students learning" 
                 className="rounded-lg shadow-lg relative w-full max-w-md mx-auto object-cover hover-grow"
               />
+              <div className="academic-scene absolute inset-0 pointer-events-none">
+                <HeroAnimation className="h-full" />
+              </div>
             </div>
           </div>
         </div>

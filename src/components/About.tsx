@@ -1,11 +1,15 @@
 
 import { GraduationCap, Users, Award } from 'lucide-react';
+import { SectionAnimation } from './AnimatedIcons';
 
 const About = () => {
   return (
     <section id="about" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative">
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            <SectionAnimation />
+          </div>
           <h2 className="text-2xl md:text-3xl font-bold mb-2">About <span className="text-fa-blue">Fastest Academy</span></h2>
           <div className="w-20 h-1 bg-fa-blue mx-auto mb-4"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -15,7 +19,10 @@ const About = () => {
         
         <div className="flex flex-col md:flex-row gap-8 mb-16">
           <div className="w-full md:w-1/2">
-            <h3 className="text-xl font-semibold mb-4">Our Story</h3>
+            <h3 className="text-xl font-semibold mb-4 flex items-center">
+              <SectionAnimation className="inline-block mr-2" />
+              Our Story
+            </h3>
             <p className="text-gray-700 mb-4">
               Founded by Mr. Prem Maurya, Fastest Academy has emerged as a leading coaching institute for students preparing for Board Exams and Competitive Tests. Our journey began with a simple mission: to provide quality education that empowers students to achieve academic excellence.
             </p>

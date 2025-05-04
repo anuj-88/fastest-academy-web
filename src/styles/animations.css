@@ -1,0 +1,45 @@
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 0.7;
+  }
+}
+
+.academic-scene {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.academic-scene::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at center, rgba(0, 99, 178, 0.05) 0%, transparent 70%);
+  animation: pulse 5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.animate-floating-icon {
+  animation: float 3s ease-in-out infinite;
+}
