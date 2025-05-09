@@ -14,3 +14,11 @@
 .logo-hover:hover {
   @apply brightness-110;
 }
+
+/* Black logo hover effect */
+.logo-black-hover {
+  @apply transition-all duration-300;
+}
+.logo-black-hover:hover {
+  @apply brightness-0;
+}

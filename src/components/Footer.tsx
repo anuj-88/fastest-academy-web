@@ -15,7 +15,7 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/afcca53e-1510-491b-af5e-cf670506751e.png" 
                 alt="Fastest Academy Logo" 
-                className="h-84 w-auto logo-hover"
+                className="h-84 w-auto logo-black-hover"
               />
             </Link>
             <p className="text-gray-400 mb-6">

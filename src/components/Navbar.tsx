@@ -31,7 +31,7 @@ const Navbar = () => {
           <img 
             src="/lovable-uploads/aeba8342-963f-4b2f-a213-83ab82c21db0.png" 
             alt="Fastest Academy Logo" 
-            className="h-12 w-auto logo-hover"
+            className="h-12 w-auto logo-black-hover"
           />
         </Link>
         
