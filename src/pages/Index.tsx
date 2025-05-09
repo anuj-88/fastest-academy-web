@@ -9,6 +9,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import HallOfFame from "@/components/HallOfFame";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CourseEnquiryForm from "@/components/CourseEnquiryForm";
 
 const Index = () => {
   return (
@@ -17,6 +18,7 @@ const Index = () => {
       <Hero />
       <About />
       <Courses />
+      <CourseEnquiryForm />
       <Gallery />
       <HallOfFame />
       <Testimonials />
