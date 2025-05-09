@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Star } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { SectionAnimation } from './AnimatedIcons';
@@ -41,17 +41,49 @@ const testimonials = [
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  
+  // Auto-change slides every 6 seconds unless paused
+  useEffect(() => {
+    let slideInterval: number | undefined;
+    
+    if (!isPaused) {
+      slideInterval = window.setInterval(() => {
+        setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      }, 6000);
+    }
+    
+    return () => {
+      if (slideInterval) clearInterval(slideInterval);
+    };
+  }, [isPaused]);
   
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? testimonials.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
+    setIsPaused(true); // Pause auto-rotation
+    
+    // Resume auto-rotation after 10 seconds
+    setTimeout(() => setIsPaused(false), 10000);
   };
   
   const goToNext = () => {
     const isLastSlide = currentIndex === testimonials.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+    setIsPaused(true); // Pause auto-rotation
+    
+    // Resume auto-rotation after 10 seconds
+    setTimeout(() => setIsPaused(false), 10000);
+  };
+  
+  const goToSlide = (slideIndex: number) => {
+    setCurrentIndex(slideIndex);
+    setIsPaused(true); // Pause auto-rotation
+    
+    // Resume auto-rotation after 10 seconds
+    setTimeout(() => setIsPaused(false), 10000);
   };
   
   return (
@@ -128,9 +160,15 @@ const Testimonials = () => {
                 className={`w-2 h-2 rounded-full ${
                   currentIndex === index ? "bg-fa-blue" : "bg-gray-300"
                 }`}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => goToSlide(index)}
               ></button>
             ))}
+          </div>
+          
+          {/* Auto-slide indicator */}
+          <div className="mt-2 flex justify-center items-center space-x-2">
+            <div className={`h-2 w-2 rounded-full ${isPaused ? 'bg-gray-400' : 'bg-fa-blue animate-pulse'}`}></div>
+            <span className="text-xs text-gray-500">{isPaused ? 'Paused' : 'Auto'}</span>
           </div>
         </div>
       </div>

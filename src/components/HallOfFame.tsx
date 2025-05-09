@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { SectionAnimation } from './AnimatedIcons';
@@ -46,13 +46,45 @@ const achievers = [
 
 const HallOfFame = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  
+  // Auto-change slides every 5 seconds unless paused
+  useEffect(() => {
+    let slideInterval: number | undefined;
+    
+    if (!isPaused) {
+      slideInterval = window.setInterval(() => {
+        setCurrentSlide((prev) => (prev === achievers.length - 1 ? 0 : prev + 1));
+      }, 5000);
+    }
+    
+    return () => {
+      if (slideInterval) clearInterval(slideInterval);
+    };
+  }, [isPaused]);
   
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === achievers.length - 1 ? 0 : prev + 1));
+    setIsPaused(true); // Pause auto-rotation when manually navigating
+    
+    // Resume auto-rotation after 10 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 10000);
   };
   
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? achievers.length - 1 : prev - 1));
+    setIsPaused(true); // Pause auto-rotation when manually navigating
+    
+    // Resume auto-rotation after 10 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 10000);
+  };
+  
+  const handleDotClick = (index: number) => {
+    setCurrentSlide(index);
+    setIsPaused(true); // Pause auto-rotation when manually navigating
+    
+    // Resume auto-rotation after 10 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 10000);
   };
   
   return (
@@ -131,13 +163,19 @@ const HallOfFame = () => {
               {achievers.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
+                  onClick={() => handleDotClick(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     currentSlide === index ? "bg-fa-blue w-6" : "bg-gray-300"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
+            </div>
+            
+            {/* Auto-slide indicator */}
+            <div className="absolute bottom-10 right-4 flex items-center space-x-2">
+              <div className={`h-2 w-2 rounded-full ${isPaused ? 'bg-gray-400' : 'bg-fa-blue animate-pulse'}`}></div>
+              <span className="text-xs text-gray-500">{isPaused ? 'Paused' : 'Auto'}</span>
             </div>
           </div>
           
