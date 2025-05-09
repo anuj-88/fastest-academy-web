@@ -43,3 +43,60 @@
 .animate-floating-icon {
   animation: float 3s ease-in-out infinite;
 }
+
+/* New animations for the redesign */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* Animated button hover effect */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-animated:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-animated:hover:before {
+  transform: translateX(0);
+}
+
+/* Scroll reveal animations */
+.reveal {
+  position: relative;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+}

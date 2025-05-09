@@ -24,7 +24,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-4'}`}>
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         {/* Logo with hover effect */}
         <Link to="/" className="flex items-center">
@@ -41,6 +41,7 @@ const Navbar = () => {
           <a href="#about" className="text-gray-800 hover:text-fa-blue font-medium transition-colors">About Us</a>
           <a href="#courses" className="text-gray-800 hover:text-fa-blue font-medium transition-colors">Courses</a>
           <a href="#gallery" className="text-gray-800 hover:text-fa-blue font-medium transition-colors">Gallery</a>
+          <a href="#hall-of-fame" className="text-gray-800 hover:text-fa-blue font-medium transition-colors">Hall of Fame</a>
           <a href="#testimonials" className="text-gray-800 hover:text-fa-blue font-medium transition-colors">Testimonials</a>
           <a href="#contact" className="text-gray-800 hover:text-fa-blue font-medium transition-colors">Contact</a>
         </div>
@@ -65,6 +66,7 @@ const Navbar = () => {
             <a href="#about" className="text-gray-800 hover:text-fa-blue font-medium transition-colors" onClick={() => setIsOpen(false)}>About Us</a>
             <a href="#courses" className="text-gray-800 hover:text-fa-blue font-medium transition-colors" onClick={() => setIsOpen(false)}>Courses</a>
             <a href="#gallery" className="text-gray-800 hover:text-fa-blue font-medium transition-colors" onClick={() => setIsOpen(false)}>Gallery</a>
+            <a href="#hall-of-fame" className="text-gray-800 hover:text-fa-blue font-medium transition-colors" onClick={() => setIsOpen(false)}>Hall of Fame</a>
             <a href="#testimonials" className="text-gray-800 hover:text-fa-blue font-medium transition-colors" onClick={() => setIsOpen(false)}>Testimonials</a>
             <a href="#contact" className="text-gray-800 hover:text-fa-blue font-medium transition-colors" onClick={() => setIsOpen(false)}>Contact</a>
           </div>

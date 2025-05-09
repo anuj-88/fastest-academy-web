@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, Star } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Star, Quote } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { SectionAnimation } from './AnimatedIcons';
 
@@ -87,34 +87,39 @@ const Testimonials = () => {
   };
   
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-gray-50">
+    <section id="testimonials" className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12 relative">
           <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
             <SectionAnimation />
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">Student <span className="text-fa-blue">Testimonials</span></h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">What Our <span className="text-fa-blue">Students Say</span></h2>
           <div className="w-20 h-1 bg-fa-blue mx-auto mb-4"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Hear from our students about their experience at Fastest Academy and how it transformed their academic journey.
           </p>
         </div>
         
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="p-6 md:p-8">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                <div className="w-full md:w-1/4 flex justify-center">
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-gray-100 shadow-md">
-                    <img 
-                      src={testimonials[currentIndex].image} 
-                      alt={testimonials[currentIndex].name}
-                      className="w-full h-full object-cover"
-                    />
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100">
+            <div className="p-6 md:p-10">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <div className="w-full md:w-1/3 flex justify-center">
+                  <div className="relative">
+                    <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-fa-blue/10 shadow-md">
+                      <img 
+                        src={testimonials[currentIndex].image} 
+                        alt={testimonials[currentIndex].name}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 bg-fa-blue text-white p-2 rounded-full shadow-md">
+                      <Quote className="h-4 w-4" />
+                    </div>
                   </div>
                 </div>
-                <div className="w-full md:w-3/4 text-center md:text-left">
-                  <div className="flex justify-center md:justify-start mb-2">
+                <div className="w-full md:w-2/3 text-center md:text-left">
+                  <div className="flex justify-center md:justify-start mb-3">
                     {[...Array(5)].map((_, i) => (
                       <Star 
                         key={i}
@@ -126,9 +131,11 @@ const Testimonials = () => {
                       />
                     ))}
                   </div>
-                  <p className="text-gray-700 italic mb-4">"{testimonials[currentIndex].testimonial}"</p>
-                  <h4 className="font-semibold text-lg">{testimonials[currentIndex].name}</h4>
-                  <p className="text-fa-blue">{testimonials[currentIndex].role}</p>
+                  <p className="text-gray-700 italic mb-6 text-lg leading-relaxed">"{testimonials[currentIndex].testimonial}"</p>
+                  <div className="border-t border-gray-100 pt-4">
+                    <h4 className="font-semibold text-lg text-gray-900">{testimonials[currentIndex].name}</h4>
+                    <p className="text-fa-blue">{testimonials[currentIndex].role}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,37 +145,41 @@ const Testimonials = () => {
             <Button 
               variant="outline"
               size="icon" 
-              className="rounded-full border-gray-300 hover:bg-fa-blue hover:text-white hover:border-fa-blue"
+              className="rounded-full border-gray-300 hover:bg-fa-blue hover:text-white hover:border-fa-blue transition-all duration-300"
               onClick={goToPrevious}
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
+            
+            <div className="flex items-center gap-3">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentIndex === index 
+                      ? "bg-fa-blue scale-125" 
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+            
             <Button 
               variant="outline"
               size="icon"
-              className="rounded-full border-gray-300 hover:bg-fa-blue hover:text-white hover:border-fa-blue"
+              className="rounded-full border-gray-300 hover:bg-fa-blue hover:text-white hover:border-fa-blue transition-all duration-300"
               onClick={goToNext}
             >
               <ArrowRight className="h-5 w-5" />
             </Button>
           </div>
           
-          <div className="mt-4 flex justify-center gap-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full ${
-                  currentIndex === index ? "bg-fa-blue" : "bg-gray-300"
-                }`}
-                onClick={() => goToSlide(index)}
-              ></button>
-            ))}
-          </div>
-          
           {/* Auto-slide indicator */}
-          <div className="mt-2 flex justify-center items-center space-x-2">
+          <div className="mt-4 flex justify-center items-center space-x-2">
             <div className={`h-2 w-2 rounded-full ${isPaused ? 'bg-gray-400' : 'bg-fa-blue animate-pulse'}`}></div>
-            <span className="text-xs text-gray-500">{isPaused ? 'Paused' : 'Auto'}</span>
+            <span className="text-xs text-gray-500">{isPaused ? 'Paused' : 'Auto-playing'}</span>
           </div>
         </div>
       </div>
