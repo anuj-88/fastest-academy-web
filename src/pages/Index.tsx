@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import HallOfFame from "@/components/HallOfFame";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CourseEnquiryForm from "@/components/CourseEnquiryForm";
+import AchievementsCarousel from "@/components/AchievementsCarousel";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <Hero />
       <About />
       <Courses />
+      <AchievementsCarousel />
       <CourseEnquiryForm />
       <Gallery />
       <HallOfFame />
