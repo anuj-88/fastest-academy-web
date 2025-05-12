@@ -115,7 +115,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-medium">Address</h4>
-                    <p className="text-gray-700">123 Education Lane, Knowledge Park, Lucknow, Uttar Pradesh, India</p>
+                    <p className="text-gray-700">New, Nandi Vihar Colony Rd, Ashraf Vihar Colony, Gomti Nagar, Lucknow, Uttar Pradesh 226028
+</p>
                   </div>
                 </div>
                 
@@ -125,8 +126,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-medium">Phone</h4>
-                    <p className="text-gray-700">+91 98765 43210</p>
-                    <p className="text-gray-700">+91 91234 56789</p>
+                    <p className="text-gray-700">+91 82994 46181</p>
                   </div>
                 </div>
                 
